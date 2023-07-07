@@ -12,7 +12,9 @@ let currentlyPressedVoicingButtonTag = null;
 let currentlyPressedTensionButtons = { 'triad': false, '9': -2, '11': -2, '13': -2 };
 let currentlyPressedInversionButton = null;
 let numberOfBars = 0;
-let lastSongChordClickedIndex = 0; // Index for last song chord button pressed
+let lastSongChordClickedIndex = 0;
+let chordWithSpaces = '';
+let audioContext = new (window.AudioContext || window.webkitAudioContext)();
 // ................................................
 let currentlyPressedNoteButton = null;
 let currentlyPressedSusButton = null;
@@ -33,8 +35,7 @@ let chordButton = {
     'b11': false, '11': false, 's11': false,
     'b13': false, '13': false, 's13': false
 }
-let chordWithSpaces = '';
-let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
 
 initEnvironment();
 
@@ -577,7 +578,8 @@ function updateChordname() {
         //bass = ' / ' + currentlyPressedBassNoteButton.getAttribute('tag');
     }
 
-    pressedLabel.innerHTML = pressedKey;
+    roman = getRomanNumeral();
+    pressedLabel.innerHTML = pressedKey + '<span class="roman-label">'+roman+'</span>';
 }
 
 function highlightChord() {
@@ -911,6 +913,36 @@ function handleScaleButtonClick(key) {
     updateChordnameAndHighlighth();
 }
 
+
+
+function getRomanNumeral() {
+    function toMm(type) {
+        switch (type) {
+            case 'major': ;
+            case 'dominant': ;
+            case 'seventh': ;
+            case 'augmented': ;
+            case 'sixth': ;
+            case 'sus2': ;
+            case 'sus4':
+                return 'major';
+            case 'minor': ;
+            case 'halfdim': ;
+            case 'diminished': ;
+            case 'minmaj': ;
+            case 'sixthm':
+                return 'minor';
+        }
+    }
+    const intervals = {'c':0,'c#':1,'d':2,'eb':3,'e':4,'f':5,'f#':6,'g':7,'ab':8,'a':9,'bb':10,'b':11};
+    const rootTonality = intervals[currentlyPressedTonalityButton?.getAttribute('tag').toLowerCase()];
+    const rootChord = intervals[currentlyPressedRootKeyButton?.getAttribute('tag').toLowerCase()];
+    const distance = rootChord>=rootTonality ? rootChord-rootTonality : (rootChord+12)-rootTonality;
+    //const mode = currentlyPressedModeButton.getAttribute('tag');
+    const chordMode = toMm(currentlyPressedTypeButton?.getAttribute('tag'));
+    return toRoman[chordMode][distance];
+}
+
 // CHORD PLAYING
 
 function handlePlayButtonClick() {
@@ -941,7 +973,7 @@ function handlePlayButtonClick() {
         var type = 'sawtooth'; // 'sine', 'square', 'sawtooth', 'triangle' and 'custom'
         //var audioContext = new (window.AudioContext || window.webkitAudioContext)();
         var gain = audioContext.createGain();
-        gain.gain.value = 0.1;
+        gain.gain.value = 0.005;
 
         for (var i = 0; i < chord.length; i++) {
             oscillator[i] = audioContext.createOscillator();
