@@ -151,6 +151,11 @@ fieldset {
 .chord-label {
     font-size: 70px;
 }
+ 
+.roman-label {
+    padding: 10px;
+    font-size:20px;
+}
 
 /******************* SONG CHORD BUTTONS  *************************/
 
