@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Piano</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="./chordGenerator.css">
+</head>
+
+<body>
+    <fieldset id="fs-tonality">
+        <legend>TONALITY</legend>
+        <div id="tonality-id" class="button-row">
+            <span class="titulo">Root:&nbsp;</span>
+            <button tag="C" id="tone-c" class="br-white" onclick="handleTonalityButtonClick('c')">C</button>
+            <button tag="C#" id="tone-c#" class="br-black" onclick="handleTonalityButtonClick('c#')">C#</button>
+            <button tag="D" id="tone-d" class="br-white" onclick="handleTonalityButtonClick('d')">D</button>
+            <button tag="Eb" id="tone-eb" class="br-black" onclick="handleTonalityButtonClick('eb')">Eb</button>
+            <button tag="E" id="tone-e" class="br-white" onclick="handleTonalityButtonClick('e')">E</button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button tag="F" id="tone-f" class="br-white" onclick="handleTonalityButtonClick('f')">F</button>
+            <button tag="F#" id="tone-f#" class="br-black" onclick="handleTonalityButtonClick('f#')">F#</button>
+            <button tag="G" id="tone-g" class="br-white" onclick="handleTonalityButtonClick('g')">G</button>
+            <button tag="Ab" id="tone-ab" class="br-black" onclick="handleTonalityButtonClick('ab')">Ab</button>
+            <button tag="A" id="tone-a" class="br-white" onclick="handleTonalityButtonClick('a')">A</button>
+            <button tag="Bb" id="tone-bb" class="br-black" onclick="handleTonalityButtonClick('bb')">Bb</button>
+            <button tag="B" id="tone-b" class="br-white" onclick="handleTonalityButtonClick('b')">B</button>
+        </div>
+        <div id="mode-id" class="button-row">
+            <span class="titulo">Mode:&nbsp;</span>
+            <button tag="major" id="mode-major" onclick="handleModeButtonClick('major')">Major</button>
+            <button tag="minor" id="mode-minor" onclick="handleModeButtonClick('minor')">Minor</button>
+        </div>
+    </fieldset>
+
+    <fieldset id="fs-scales">
+        <legend>SCALES</legend>
+        <div id="scale-id">
+            <div id="scale-row1" class="button-row">
+                <span class="titulo">Scale:&nbsp;</span>
+                <button tag="none" id="scale-none" onclick="handleScaleButtonClick('none')">Hide</button>
+                <button tag="ionian" id="scale-ionian" onclick="handleScaleButtonClick('ionian')">Ioian</button>
+                <button tag="dorian" id="scale-dorian" onclick="handleScaleButtonClick('dorian')">Dorian</button>
+                <button tag="phrygian" id="scale-phrygian"
+                    onclick="handleScaleButtonClick('phrygian')">Phrygian</button>
+                <button tag="lydian" id="scale-lydian" onclick="handleScaleButtonClick('lydian')">Lydian</button>
+                <button tag="mixolydian" id="scale-mixolydian"
+                    onclick="handleScaleButtonClick('mixolydian')">Mixolydian</button>
+                <button tag="aeolian" id="scale-aeolian" onclick="handleScaleButtonClick('aeolian')">Aeolian</button>
+                <button tag="locrian" id="scale-locrian" onclick="handleScaleButtonClick('locrian')">Locrian</button>
+            </div>
+            <div id="scale-row2" class="button-row">
+                <span></span>
+                <button tag="domdim" id="scale-domdim" onclick="handleScaleButtonClick('domdim')">Dom.dim.</button>
+                <button tag="bluesmaj" id="scale-bluesmaj" onclick="handleScaleButtonClick('bluesmaj')">Blues
+                    Maj</button>
+                <button tag="gospelmaj" id="scale-gospelmaj" onclick="handleScaleButtonClick('gospelmaj')">Gospel
+                    Maj</button>
+                <button tag="bluesmin" id="scale-bluesmin" onclick="handleScaleButtonClick('bluesmin')">Blues
+                    min</button>
+                <button tag="gospelmin" id="scale-gospelmin" onclick="handleScaleButtonClick('gospelmin')">Gospel
+                    mim</button>
+            </div>
+    </fieldset>
+
+    <fieldset id="fs-chord">
+        <legend>CHORD</legend>
+
+        <div id="root-id" class="button-row">
+            <span>Chord Root Key:&nbsp;</span>
+            <button tag="C" id="root-c" class="br-white" onclick="handleRootKeyButtonClick('c')">C</button>
+            <button tag="C#" id="root-c#" class="br-black" onclick="handleRootKeyButtonClick('c#')">C#</button>
+            <button tag="D" id="root-d" class="br-white" onclick="handleRootKeyButtonClick('d')">D</button>
+            <button tag="Eb" id="root-eb" class="br-black" onclick="handleRootKeyButtonClick('eb')">Eb</button>
+            <button tag="E" id="root-e" class="br-white" onclick="handleRootKeyButtonClick('e')">E</button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button tag="F" id="root-f" class="br-white" onclick="handleRootKeyButtonClick('f')">F</button>
+            <button tag="F#" id="root-f#" class="br-black" onclick="handleRootKeyButtonClick('f#')">F#</button>
+            <button tag="G" id="root-g" class="br-white" onclick="handleRootKeyButtonClick('g')">G</button>
+            <button tag="Ab" id="root-ab" class="br-black" onclick="handleRootKeyButtonClick('ab')">Ab</button>
+            <button tag="A" id="root-a" class="br-white" onclick="handleRootKeyButtonClick('a')">A</button>
+            <button tag="Bb" id="root-bb" class="br-black" onclick="handleRootKeyButtonClick('bb')">Bb</button>
+            <button tag="B" id="root-b" class="br-white" onclick="handleRootKeyButtonClick('b')">B</button>
+        </div>
+
+        <div id="bass-id" class="button-row">
+            <span>Chord Bass Note:</span>
+            <button id="bass-c" tag="C" class="br-white" onclick="handleBassNoteButtonClick('c')">C</button>
+            <button id="bass-c#" tag="C#" class="br-black" onclick="handleBassNoteButtonClick('c#')">C#</button>
+            <button id="bass-d" tag="D" class="br-white" onclick="handleBassNoteButtonClick('d')">D</button>
+            <button id="bass-eb" tag="Eb" class="br-black" onclick="handleBassNoteButtonClick('eb')">Eb</button>
+            <button id="bass-e" tag="E" class="br-white" onclick="handleBassNoteButtonClick('e')">E</button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button id="bass-f" tag="F" class="br-white" onclick="handleBassNoteButtonClick('f')">F</button>
+            <button id="bass-f#" tag="F#" class="br-black" onclick="handleBassNoteButtonClick('f#')">F#</button>
+            <button id="bass-g" tag="G" class="br-white" onclick="handleBassNoteButtonClick('g')">G</button>
+            <button id="bass-ab" tag="Ab" class="br-black" onclick="handleBassNoteButtonClick('ab')">Ab</button>
+            <button id="bass-a" tag="A" class="br-white" onclick="handleBassNoteButtonClick('a')">A</button>
+            <button id="bass-bb" tag="Bb" class="br-black" onclick="handleBassNoteButtonClick('bb')">Bb</button>
+            <button id="bass-b" tag="B" class="br-white" onclick="handleBassNoteButtonClick('b')">B</button>
+        </div>
+
+        <!--
+        <div id="id-builder">
+            <div id="id-builder1" class="button-row-builder">
+                <span>Chord builder:</span>
+                <button class="arrow" onclick="handleBuilderButtonClick('1-1')"><i class="fas fa-chevron-left"></i></button>
+                <button id="build-1" tag="1" onclick="handleBuilderButtonClick('1')">1</button>
+                <button class="arrow" onclick="handleBuilderButtonClick('1+1')"><i class="fas fa-chevron-right"></i></button>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <button class="arrow" onclick="handleBuilderButtonClick('2-1')"><i class="fas fa-chevron-left"></i></button>
+                <button id="build-sus2" tag="sus2" onclick="handleBuilderButtonClick('sus2')">sus</button>
+                <button id="build-2" tag="2" onclick="handleBuilderButtonClick('2')">2</button>
+                <button class="arrow" onclick="handleBuilderButtonClick('2+1')"><i class="fas fa-chevron-right"></i></button>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <button class="arrow" onclick="handleBuilderButtonClick('3-1')"><i class="fas fa-chevron-left"></i></button>
+                <button id="build-b3" tag="b3" onclick="handleBuilderButtonClick('b3')">b</button>
+                <button id="build-3" tag="3" onclick="handleBuilderButtonClick('3')">3</button>
+                <button class="arrow" onclick="handleBuilderButtonClick('3+1')"><i class="fas fa-chevron-right"></i></button>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <button class="arrow" onclick="handleBuilderButtonClick('4-1')"><i class="fas fa-chevron-left"></i></button>
+                <button id="build-sus4" tag="sus4" onclick="handleBuilderButtonClick('sus4')">sus</button>
+                <button id="build-4" tag="4" onclick="handleBuilderButtonClick('4')">4</button>
+                <button class="arrow" onclick="handleBuilderButtonClick('4+1')"><i class="fas fa-chevron-right"></i></button>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <button class="arrow" onclick="handleBuilderButtonClick('5-1')"><i class="fas fa-chevron-left"></i></button>
+                <button id="build-b5" tag="b5" onclick="handleBuilderButtonClick('b5')">b</button>
+                <button id="build-5" tag="5" onclick="handleBuilderButtonClick('5')">5</button>
+                <button id="build-s5" tag="s5" onclick="handleBuilderButtonClick('s5')">#</button>
+                <button class="arrow" onclick="handleBuilderButtonClick('5+1')"><i class="fas fa-chevron-right"></i></button>
+
+            </div>
+            <div id="id-builder2" class="button-row-builder">
+                <span></span>
+                <button class="arrow" onclick="handleBuilderButtonClick('6-1')"><i class="fas fa-chevron-left"></i></button>
+                <button id="build-6" tag="6" onclick="handleBuilderButtonClick('6')">6</button>
+                <button class="arrow" onclick="handleBuilderButtonClick('6+1')"><i class="fas fa-chevron-right"></i></button>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <button class="arrow" onclick="handleBuilderButtonClick('7-1')"><i class="fas fa-chevron-left"></i></button>
+                <button id="build-b7" tag="b7" onclick="handleBuilderButtonClick('b7')">b</button>
+                <button id="build-7" tag="7" onclick="handleBuilderButtonClick('7')">7</button>
+                <button class="arrow" onclick="handleBuilderButtonClick('7+1')"><i class="fas fa-chevron-right"></i></button>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <button class="arrow" onclick="handleBuilderButtonClick('9-1')"><i class="fas fa-chevron-left"></i></button>
+                <button id="build-b9" tag="b9" onclick="handleBuilderButtonClick('b9')">b</button>
+                <button id="build-9" tag="9" onclick="handleBuilderButtonClick('9')">9</button>
+                <button id="build-s9" tag="s9" onclick="handleBuilderButtonClick('s9')">#</button>
+                <button class="arrow" onclick="handleBuilderButtonClick('9+1')"><i class="fas fa-chevron-right"></i></button>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <button class="arrow" onclick="handleBuilderButtonClick('11-1')"><i class="fas fa-chevron-left"></i></button>
+                <button id="build-b11" tag="b11" onclick="handleBuilderButtonClick('b11')">b</button>
+                <button id="build-11" tag="11" onclick="handleBuilderButtonClick('11')">11</button>
+                <button id="build-s11" tag="s11" onclick="handleBuilderButtonClick('s11')">#</button>
+                <button class="arrow" onclick="handleBuilderButtonClick('11+1')"><i class="fas fa-chevron-right"></i></button>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <button class="arrow" onclick="handleBuilderButtonClick('13-1')"><i class="fas fa-chevron-left"></i></button>
+                <button id="build-b13" tag="b13" onclick="handleBuilderButtonClick('b13')">b</button>
+                <button id="build-13" tag="13" onclick="handleBuilderButtonClick('13')">13</button>
+                <button id="build-s13" tag="s13" onclick="handleBuilderButtonClick('s13')">#</button>
+                <button class="arrow" onclick="handleBuilderButtonClick('13+1')"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+-->
+
+        <div id="type-id" class="button-row">
+            <span>Chord shortcut:</span>
+
+            <button id="type-major" tag="major" onclick="handleTypeButtonClick('major')">maj7</button>
+            <button id="type-minor" tag="minor" onclick="handleTypeButtonClick('minor')">m7</button>
+            <button id="type-dominant" tag="dominant" onclick="handleTypeButtonClick('dominant')">7 (to MAJ)</button>
+            <button id="type-seventh" tag="seventh" onclick="handleTypeButtonClick('seventh')">7 (to min)</button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button id="type-halfdim" tag="halfdim" onclick="handleTypeButtonClick('halfdim')">Halfdim</button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button id="type-diminished" tag="diminished" onclick="handleTypeButtonClick('diminished')">Dim</button>
+            <button id="type-augmented" tag="augmented" onclick="handleTypeButtonClick('augmented')">Aug</button>
+            <button id="type-minmaj" tag="minmaj" onclick="handleTypeButtonClick('minmaj')">MinMaj</button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button id="type-sixth" tag="sixth" onclick="handleTypeButtonClick('sixth')">6</button>
+            <button id="type-sixthm" tag="sixthm" onclick="handleTypeButtonClick('sixthm')">m6</button>
+            <button id="type-sus2" tag="sus2" onclick="handleTypeButtonClick('sus2')">sus2</button>
+            <button id="type-sus4" tag="sus4" onclick="handleTypeButtonClick('sus4')">sus4</button>
+
+        </div>
+
+        <div id="tension-id" class="button-row">
+            <span>Tensions:</span>
+
+            <button id="tension-triad" tag="triad" onclick="handleTensionButtonClick('triad')">Triad</button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button id="tension-jazz" tag="jazz" onclick="handleTensionButtonClick('jazz')">Jazz (7s)</button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button><i class="fas fa-chevron-left"></i></button>
+            <button id="tension-b9" tag="b9" onclick="handleTensionButtonClick('b9')">b</button>
+            <button id="tension-9" tag="9" onclick="handleTensionButtonClick('9')">9</button>
+            <button id="tension-s9" tag="s9" onclick="handleTensionButtonClick('s9')">#</button>
+            <button><i class="fas fa-chevron-right"></i></button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button><i class="fas fa-chevron-left"></i></button>
+            <button id="tension-b11" tag="b11" onclick="handleTensionButtonClick('b11')">b</button>
+            <button id="tension-11" tag="11" onclick="handleTensionButtonClick('11')">11</button>
+            <button id="tension-s11" tag="s11" onclick="handleTensionButtonClick('s11')">#</button>
+            <button><i class="fas fa-chevron-right"></i></button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button><i class="fas fa-chevron-left"></i></button>
+            <button id="tension-b13" tag="b13" onclick="handleTensionButtonClick('b13')">b</button>
+            <button id="tension-13" tag="13" onclick="handleTensionButtonClick('13')">13</button>
+            <button id="tension-s13" tag="s13" onclick="handleTensionButtonClick('s13')">#</button>
+            <button><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <div id="voicing-id" class="button-row">
+            <span>Voicing:</span>
+
+            <button id="voicing-root" tag="root" onclick="handleVoicingButtonClick('root')">Root</button>
+            <button id="voicing-rootless" tag="rootless"
+                onclick="handleVoicingButtonClick('rootless')">Rootless</button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button id="voicing-shell3" tag="shell3" onclick="handleVoicingButtonClick('shell3')">Shell3</button>
+            <button id="voicing-shell7" tag="shell7" onclick="handleVoicingButtonClick('shell7')">Shell7</button>
+            <button id="voicing-shell37" tag="shell37" onclick="handleVoicingButtonClick('shell37')">Shell37</button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button id="voicing-open3" tag="open3" onclick="handleVoicingButtonClick('open3')">Open3</button>
+            <button id="voicing-open5" tag="open5" onclick="handleVoicingButtonClick('open5')">Open5</button>
+            <button id="voicing-open7" tag="open7" onclick="handleVoicingButtonClick('open7')">Open7</button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button id="voicing-kenny" tag="kenny" onclick="handleVoicingButtonClick('kenny')">Kenny Barron</button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button id="voicing-fourth" tag="fourth" onclick="handleVoicingButtonClick('fourth')">Fourth</button>
+        </div>
+
+        <div id="inversion-id" class="button-row">
+            <span>Inversion:</span>
+
+            <button id="inversion-0" tag="0" onclick="handleInversionButtonClick('0')">None</button>
+            <button id="inversion-1" tag="1" onclick="handleInversionButtonClick('1')">1st (A)</button>
+            <button id="inversion-2" tag="2" onclick="handleInversionButtonClick('2')">2nd</button>
+            <button id="inversion-3" tag="3" onclick="handleInversionButtonClick('3')">3rd (B)</button>
+        </div>
+
+    </fieldset>
+
+    <fieldset id="fs-song">
+        <legend>SONG</legend>
+
+        <div id="songcontrol-id" class="button-row songbackground">
+            <span>Song chords:</span>
+
+            <button id="control-add-id" onclick="handleSongChordButtonClick('add')">ADD</button>
+            <button id="control-sep-id" onclick="handleSongChordButtonClick('sep')">Bar sep.</button>
+            <button id="control-remove-id" onclick="handleSongChordButtonClick('remove')">Del.last</button>
+            <button id="control-removeall-id" onclick="handleSongChordButtonClick('removeall')">Del.ALL</button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button id="control-save-id" onclick="handleSongChordButtonClick('save')">Save song</button>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <button id="control-load-id" onclick="handleSongChordButtonClick('load')">Load</button>
+            &nbsp;&lt;==&gt;&nbsp;
+            <input type="file" id="inputFile" accept=".html">
+        </div>
+
+    </fieldset>
+
+    <div id="piano-id" class="piano">
+        <div class="white-key" id="c0"></div>
+        <div class="black-key" id="c#0"></div>
+        <div class="white-key" id="d0"></div>
+        <div class="black-key" id="eb0"></div>
+        <div class="white-key" id="e0"></div>
+        <div class="white-key" id="f0"></div>
+        <div class="black-key" id="f#0"></div>
+        <div class="white-key" id="g0"></div>
+        <div class="black-key" id="ab0"></div>
+        <div class="white-key" id="a0"></div>
+        <div class="black-key" id="bb0"></div>
+        <div class="white-key" id="b0"></div>
+
+        <div class="right white-key" id="c1"></div>
+        <div class="right black-key" id="c#1"></div>
+        <div class="right white-key" id="d1"></div>
+        <div class="right black-key" id="eb1"></div>
+        <div class="right white-key" id="e1"></div>
+        <div class="right white-key" id="f1"></div>
+        <div class="right black-key" id="f#1"></div>
+        <div class="right white-key" id="g1"></div>
+        <div class="right black-key" id="ab1"></div>
+        <div class="right white-key" id="a1"></div>
+        <div class="right black-key" id="bb1"></div>
+        <div class="right white-key" id="b1"></div>
+
+        <div class="right white-key" id="c2"></div>
+        <div class="right black-key" id="c#2"></div>
+        <div class="right white-key" id="d2"></div>
+        <div class="right black-key" id="eb2"></div>
+        <div class="right white-key" id="e2"></div>
+        <div class="right white-key" id="f2"></div>
+        <div class="right black-key" id="f#2"></div>
+        <div class="right white-key" id="g2"></div>
+        <div class="right black-key" id="ab2"></div>
+        <div class="right white-key" id="a2"></div>
+        <div class="right black-key" id="bb2"></div>
+        <div class="right white-key" id="b2"></div>
+
+        <div class="right white-key" id="c3"></div>
+        <div class="right black-key" id="c#3"></div>
+        <div class="right white-key" id="d3"></div>
+        <div class="right black-key" id="eb3"></div>
+        <div class="right white-key" id="e3"></div>
+        <div class="right white-key" id="f3"></div>
+        <div class="right black-key" id="f#3"></div>
+        <div class="right white-key" id="g3"></div>
+        <div class="right black-key" id="ab3"></div>
+        <div class="right white-key" id="a3"></div>
+        <div class="right black-key" id="bb3"></div>
+        <div class="right white-key" id="b3"></div>
+
+    </div>
+
+    <div id="label-id">
+        <span id="pressed-label" class="chord-label">
+        </span>
+        <span>
+            <button id="control-play-id" onclick="handlePlayButtonClick()">Play</button>
+        </span>
+    </div>
+
+    <fieldset id="fs-songchords">
+        <legend>SONG CHORDS</legend>
+        <label for="songname-id">Song name</label>
+        <input id="songname-id" type="text" value="MySong" />
+        <div id="songchords-id" class="button-row-chords">
+        </div>
+    </fieldset>
+
+    <script src="./chordGeneratorConstants.js"></script>
+    <script src="./chordGenerator.js"></script>
+
+</body>
+
+</html>

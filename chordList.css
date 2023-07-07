@@ -1,0 +1,95 @@
+@page {
+    size: A4;
+    margin: 0;
+}
+
+body {
+    padding: 2cm; /* Márgenes interiores de 2cm en el cuerpo de la página */
+}
+
+.page {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.item {
+    border: 1px solid black; /* Borde para cada elemento */
+    padding: 1cm; /* Espacios interiores de 1cm */
+    width: calc(50% - 1cm); /* Anchura del elemento */
+    box-sizing: border-box; /* Incluye el borde en el ancho del elemento */
+}
+
+/********************** PIANO ********************************/
+
+.piano {
+    display: flex;
+    margin-left: 5px;
+}
+
+.white-key {
+    position: relative;
+    /* ADD */
+    width: 40px;
+    height: 180px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    display: flex;
+    /* ADD */
+    align-items: flex-end;
+    /* ADD */
+    justify-content: center;
+    /* ADD */
+}
+
+.white-key::after {
+    content: attr(data-key);
+    position: absolute;
+    bottom: 5px;
+    /* Adjust the value as needed */
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.black-key {
+    position: relative;
+    width: 22px;
+    height: 120px;
+    background-color: black;
+    color: white;
+    margin-left: -11px;
+    margin-right: -11px;
+    z-index: 1;
+    border: 1px solid black;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.black-key::after {
+    content: attr(data-key);
+    position: absolute;
+    bottom: 5px;
+    /* Adjust the value as needed */
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+}
+
+.highlight {
+    background-color: red;
+    color: white;
+}
+
+.highlightLeft {
+    background-color: blue;
+    color: white;
+}
