@@ -579,7 +579,7 @@ function updateChordname() {
     }
 
     roman = getRomanNumeral();
-    pressedLabel.innerHTML = pressedKey + '<span class="roman-label">'+roman+'</span>';
+    pressedLabel.innerHTML = pressedKey + '<span class="roman-label">' + roman + '</span>';
 }
 
 function highlightChord() {
@@ -598,7 +598,9 @@ function highlightChord() {
         highlightChordKeys(chord);
         highlightBassKey(bassNote);
         chordWithSpaces = bassNote + '0 ' + chord;
-        document.getElementById('control-play-id').click();
+        if (document.getElementById('id-autoplay').checked) {
+            document.getElementById('control-play-id').click();
+        }
     }
 }
 
@@ -934,10 +936,10 @@ function getRomanNumeral() {
                 return 'minor';
         }
     }
-    const intervals = {'c':0,'c#':1,'d':2,'eb':3,'e':4,'f':5,'f#':6,'g':7,'ab':8,'a':9,'bb':10,'b':11};
+    const intervals = { 'c': 0, 'c#': 1, 'd': 2, 'eb': 3, 'e': 4, 'f': 5, 'f#': 6, 'g': 7, 'ab': 8, 'a': 9, 'bb': 10, 'b': 11 };
     const rootTonality = intervals[currentlyPressedTonalityButton?.getAttribute('tag').toLowerCase()];
     const rootChord = intervals[currentlyPressedRootKeyButton?.getAttribute('tag').toLowerCase()];
-    const distance = rootChord>=rootTonality ? rootChord-rootTonality : (rootChord+12)-rootTonality;
+    const distance = rootChord >= rootTonality ? rootChord - rootTonality : (rootChord + 12) - rootTonality;
     //const mode = currentlyPressedModeButton.getAttribute('tag');
     const chordMode = toMm(currentlyPressedTypeButton?.getAttribute('tag'));
     return toRoman[chordMode][distance];
