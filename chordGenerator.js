@@ -168,7 +168,7 @@ function handleTypeButtonClick(type) {
     if (type == "minor" && !currentlyPressedTensionButtons['triad']) {
         handleScaleButtonClick('dorian');
     }
-    if (type == "dominant" && !currentlyPressedTensionButtons['triad']) {
+    if ( (type == "dominant" || type=='seventh') && !currentlyPressedTensionButtons['triad']) {
         handleScaleButtonClick('domdim');
     }
     updateChordnameAndHighlighth();
@@ -643,6 +643,7 @@ function displayScaleDegreesOnPiano(scaleTonality, scale = []) {
 
 function updateTonality() {
     let root = currentlyPressedTonalityButton ? currentlyPressedTonalityButton.getAttribute('tag') : null;
+    let rootChord = currentlyPressedRootKeyButton ? currentlyPressedRootKeyButton.getAttribute('tag') : null;
     let mode = currentlyPressedModeButton ? currentlyPressedModeButton.getAttribute('tag') : null;
     let scaleMode = currentlyPressedScaleButton ? currentlyPressedScaleButton.getAttribute('tag') : null;
     if (root && mode && scaleMode) {
@@ -664,14 +665,14 @@ function updateTonality() {
             'gospelmaj': [0, 2, 3, 4, 7, 8, 9],
             'bluesmin': [0, 3, 5, 7, 10],
             'gospelmin': [0, 3, 5, 6, 7, 10, 11]
-        };
+        }; 
         let tonalityScale = [];
         intervals[mode].forEach(interval => {
             tonalityScale.push(i2n[(n2i[root] + interval) % 12]);
         });
         let scale = [];
         intervals[scaleMode].forEach(interval => {
-            scale.push(i2n[(n2i[root] + interval) % 12]);
+            scale.push(i2n[(n2i[rootChord] + interval) % 12]);
         });
         displayScaleDegreesOnPiano(tonalityScale, scale);
     }
